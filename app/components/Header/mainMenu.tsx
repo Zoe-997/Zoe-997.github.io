@@ -1,11 +1,22 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Menu } from 'antd';
 import type { MenuProps } from 'antd';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation'
 
 const MainMenu = () => {
+    const pathname = usePathname()
     const [current, setCurrent] = useState('home');
+    const menuItemActive = pathname.split('/').filter(item => item !== '')
+
+    useEffect(() => {
+        if (menuItemActive.length === 0) setCurrent('home')
+        else {
+            setCurrent(menuItemActive[0])
+        }
+    }, [menuItemActive])
+    
     const items: MenuProps['items'] = [
         {
             key: 'home',
@@ -31,11 +42,7 @@ const MainMenu = () => {
                 <Link href='/contact'>Contact</Link>
             )
         }
-    ]
-
-    const handleChangeActive: MenuProps['onClick'] = (e) => {
-        setCurrent(e.key)
-    }
+    ]  
 
     return (
         <Menu
@@ -44,7 +51,6 @@ const MainMenu = () => {
             selectedKeys={[current]}
             items={items}
             style={{ flex: 1, minWidth: 0 }}
-            onClick={handleChangeActive}
         />
     );
 }

@@ -1,25 +1,33 @@
 'use client'
-import { Breadcrumb } from 'antd';
+import { usePathname } from 'next/navigation'
 import { HomeOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 const BreadcrumbComponent = () => {
-    return (
-        <Breadcrumb className='py-2'
-            items={[
-              {
-                href: '',
-                title: <HomeOutlined />,
-              },
-              {
-                href: '',
-                title: 'Application List'
-              },
-              {
-                title: 'Application',
-              },
-            ]}
-        />
-    );
+  const pathname = usePathname()
+  const breadcrumbItems = pathname.split('/').map(item => (
+    {
+      href: item === '' ? "/" : `/${item}`,
+      title: item === '' ? <HomeOutlined /> : item.replace('-', ' ')
+    }
+  ))
+
+  return (
+    <>
+      {pathname !== '/' ?
+        <ul className='flex flex-wrap items-center py-2'>
+          {breadcrumbItems.map((item, index) => (
+            <li key={index}>
+              {index === 0 ? '' : '/' } &nbsp;
+              <Link href={item.href} className='capitalize'>{item.title}</Link> &nbsp;
+            </li>
+          ))}
+        </ul>
+      :
+        <div className='h-[40px]'></div>
+      }
+    </>
+  );
 }
  
 export default BreadcrumbComponent;
