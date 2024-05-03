@@ -1,7 +1,5 @@
 'use client'
 import { useEffect, useState } from 'react';
-import { Menu } from 'antd';
-import type { MenuProps } from 'antd';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation'
 
@@ -17,7 +15,7 @@ const MainMenu = () => {
         }
     }, [menuItemActive])
     
-    const items: MenuProps['items'] = [
+    const items: any = [
         {
             key: 'home',
             label: (
@@ -45,13 +43,13 @@ const MainMenu = () => {
     ]  
 
     return (
-        <Menu
-            theme="dark"
-            mode="horizontal"
-            selectedKeys={[current]}
-            items={items}
-            style={{ flex: 1, minWidth: 0 }}
-        />
+        <nav className="text-white">
+            <ul className="flex flex-wrap items-center">
+               {items.map((item: any) => (
+                <li className={`${current === item.key ? 'bg-[#1677ff]': 'bg-transparent'} p-5`} key={item.key}>{item.label}</li>
+               ))}
+            </ul>
+        </nav>
     );
 }
  

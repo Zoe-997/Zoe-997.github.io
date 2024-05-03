@@ -1,14 +1,14 @@
 'use client'
 import { usePathname } from 'next/navigation'
-import { HomeOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+import { GoHomeFill } from "react-icons/go";
 
 const BreadcrumbComponent = () => {
   const pathname = usePathname()
   const breadcrumbItems = pathname.split('/').map(item => (
     {
       href: item === '' ? "/" : `/${item}`,
-      title: item === '' ? <HomeOutlined /> : item.replace('-', ' ')
+      title: item === '' ? <GoHomeFill /> : item.replace('-', ' ')
     }
   ))
 
@@ -19,7 +19,7 @@ const BreadcrumbComponent = () => {
           {breadcrumbItems.map((item, index) => (
             <li key={index}>
               {index === 0 ? '' : '/' } &nbsp;
-              <Link href={item.href} className='capitalize'>{item.title}</Link> &nbsp;
+              <Link href={item.href} className='capitalize hover:text-[#1677ff]'>{item.title}</Link> &nbsp;
             </li>
           ))}
         </ul>

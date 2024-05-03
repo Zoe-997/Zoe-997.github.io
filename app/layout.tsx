@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/app/components/Header/header'
 import Footer from '@/app/components/Footer/footer'
 import BreadcrumbComponent from '@/app/components/Common/breadcrumb'
+import Container from './components/Common/Container';
 
 const fontBase = Nunito({ subsets: ['latin'] })
 
@@ -23,7 +24,9 @@ export default async function RootLayout({
         <Header />
         <main id="page-main" className='px-[48px]'>
           <BreadcrumbComponent/>
-          <div className='bg-white min-h-[300px] rounded-2xl p-5'>{children}</div>
+          <Container>
+            <div className="bg-white min-h-[300px] rounded-2xl p-5">{children}</div>
+          </Container>
         </main>
         <Footer/>
       </body>

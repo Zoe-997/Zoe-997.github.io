@@ -1,11 +1,10 @@
 'use client'
-import { Layout } from 'antd';
 
 const Footer = () => {
     return (
-        <Layout.Footer style={{ textAlign: 'center' }}>
+        <footer className="text-center mt-5">
           Mdc Design ©{new Date().getFullYear()} Created by Mdc
-        </Layout.Footer>
+        </footer>
     );
 }
  
